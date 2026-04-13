@@ -1,15 +1,28 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { BookOpen, Heart, Award, Users, Building2, Sparkles, ChevronRight, CheckCircle2 } from 'lucide-react'
 import Particles from '../components/Particles'
 import Navbar from '../components/Navbar'
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: (i: number = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] } }),
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      delay: i * 0.12,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }),
 }
-const stagger = { visible: { transition: { staggerChildren: 0.1 } } }
+
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+}
 
 function useCountUp(target: number, duration = 1500) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -131,7 +144,7 @@ export default function Index() {
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SEGMENTS.map((seg, i) => (
-              <motion.div key={seg.label} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }} whileHover={{ scale: 1.03, y: -4 }} className="p-6 rounded-[2rem] backdrop-blur-md transition-all duration-300 cursor-pointer" style={{ backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
+              <motion.div key={seg.label} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }} whileHover={{ scale: 1.03, y: -4 }} className="p-6 rounded-[2rem] backdrop-blur-md cursor-pointer" style={{ backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
                 <div className="w-14 h-14 rounded-full flex items-center justify-center text-2xl mb-4" style={{ backgroundColor: 'rgba(2,103,10,0.25)' }}>{seg.emoji}</div>
                 <h3 className="text-white font-bold text-lg mb-1">{seg.label}</h3>
                 <p className="text-sm font-medium mb-3" style={{ color: '#b1b1b1' }}>{seg.desc}</p>
@@ -151,7 +164,7 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {STEPS.map((step, i) => (
               <motion.div key={step.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center font-extrabold text-white text-lg mb-5 shrink-0 relative z-10" style={{ backgroundColor: '#02670a' }}>{step.num}</div>
+                <div className="w-14 h-14 rounded-full flex items-center justify-center font-extrabold text-white text-lg mb-5" style={{ backgroundColor: '#02670a' }}>{step.num}</div>
                 <h3 className="font-bold text-black text-lg mb-2" style={{ letterSpacing: '-0.02em' }}>{step.title}</h3>
                 <p className="text-gray-500 font-medium text-sm leading-relaxed">{step.desc}</p>
               </motion.div>
@@ -168,21 +181,21 @@ export default function Index() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             {PRICING.map((plan, i) => (
-              <motion.div key={plan.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} whileHover={{ scale: plan.highlight ? 1.02 : 1.03, y: -4 }} className="p-10 rounded-[2.5rem] relative transition-all duration-300" style={{ backgroundColor: plan.highlight ? '#02670a' : 'white', color: plan.highlight ? 'white' : 'black', border: plan.highlight ? 'none' : '1px solid rgba(0,0,0,0.08)', boxShadow: plan.highlight ? '0 24px 64px rgba(2,103,10,0.35)' : '0 4px 24px rgba(0,0,0,0.06)', transform: plan.highlight ? 'scale(1.05)' : undefined }}>
+              <motion.div key={plan.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} whileHover={{ scale: plan.highlight ? 1.02 : 1.03, y: -4 }} className="p-10 rounded-[2.5rem] relative" style={{ backgroundColor: plan.highlight ? '#02670a' : 'white', color: plan.highlight ? 'white' : 'black', border: plan.highlight ? 'none' : '1px solid rgba(0,0,0,0.08)', boxShadow: plan.highlight ? '0 24px 64px rgba(2,103,10,0.35)' : '0 4px 24px rgba(0,0,0,0.06)', transform: plan.highlight ? 'scale(1.05)' : undefined }}>
                 {'badge' in plan && plan.badge && <span className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-bold text-black" style={{ backgroundColor: '#c9a84c' }}>{plan.badge}</span>}
                 <h3 className="font-bold text-xl mb-1" style={{ color: plan.highlight ? 'rgba(255,255,255,0.8)' : '#6b7280' }}>{plan.name}</h3>
                 <div className="flex items-baseline gap-1 mb-1"><span className="text-5xl font-extrabold" style={{ letterSpacing: '-0.03em' }}>{plan.price}</span></div>
                 <p className="text-sm font-medium mb-8" style={{ color: plan.highlight ? 'rgba(255,255,255,0.6)' : '#9ca3af' }}>{plan.period}</p>
                 <ul className="space-y-3 mb-8">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2.5 text-sm font-medium">
+                  {plan.features.map((feat) => (
+                    <li key={feat} className="flex items-center gap-2.5 text-sm font-medium">
                       <CheckCircle2 size={16} color={plan.highlight ? '#c9a84c' : '#02670a'} className="shrink-0" />
-                      <span style={{ color: plan.highlight ? 'rgba(255,255,255,0.85)' : '#374151' }}>{f}</span>
+                      <span style={{ color: plan.highlight ? 'rgba(255,255,255,0.85)' : '#374151' }}>{feat}</span>
                     </li>
                   ))}
                 </ul>
                 <motion.div whileTap={{ scale: 0.97 }}>
-                  <Link to="/login" className="block w-full text-center py-3.5 rounded-[3rem] font-bold text-sm transition-all" style={{ backgroundColor: plan.highlight ? '#c9a84c' : '#02670a', color: plan.highlight ? '#000' : 'white' }}>{plan.cta}</Link>
+                  <Link to="/login" className="block w-full text-center py-3.5 rounded-[3rem] font-bold text-sm" style={{ backgroundColor: plan.highlight ? '#c9a84c' : '#02670a', color: plan.highlight ? '#000' : 'white' }}>{plan.cta}</Link>
                 </motion.div>
               </motion.div>
             ))}
