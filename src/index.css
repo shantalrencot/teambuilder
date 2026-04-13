@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat: 'Montserrat', sans-serif;
+
+  --color-primary:       #02670a;
+  --color-primary-dark:  #014d07;
+  --color-primary-light: #038a0d;
+  --color-accent:        #b1b1b1;
+  --color-surface:       #fefefe;
+  --color-contrast:      #000000;
+  --color-depth:         #364033;
+  --color-gold:          #c9a84c;
+  --color-gold-light:    #f0d080;
+
+  --radius-card: 2rem;
+  --radius-btn:  3rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fefefe;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(177,177,177,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(177,177,177,0.5); }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
